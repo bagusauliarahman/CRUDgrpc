@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "belajar.grpc/crud/kendaraan";
+
+package kendaraan;
+
+service Mobil {
+    rpc GetAllMobil (Empty) returns (stream InfoMobil);
+    rpc GetMobil (Id) returns (InfoMobil);
+    rpc CreateMobil (InfoMobil) returns (Id);
+    rpc UpdateMobil (InfoMobil) returns (Status);
+    rpc DeleteMobil (Id) returns (Status);
+}
+
+
+message Empty{};
+
+message InfoMobil{
+    string id = 1;
+    string warna = 2;
+    int32 tahun = 3;
+    Manufaktur manufaktur = 4;
+}
+
+message Manufaktur {
+    string merek = 1;
+    string jenis = 2;
+
+}
+
+message Id {
+    string value = 1;
+}
+
+message Status {
+    int32 value = 1;
+}
+
